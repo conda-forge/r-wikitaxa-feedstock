@@ -29,6 +29,7 @@ requirements:
     - r-jsonlite
     - r-tibble
     - r-xml2
+
   run:
     - r-base
     - r-wikidatar

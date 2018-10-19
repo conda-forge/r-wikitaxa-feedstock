@@ -12,7 +12,7 @@ source:
   sha256: 944523717b2571af02a6bf15a58100dfb69530f702ab919f1c5fd3d263588c19
 
 build:
-  number: 0
+  number: 1
   script: R CMD INSTALL --build .
   skip: True  # [win32]
   rpaths:
@@ -29,6 +29,7 @@ requirements:
     - r-jsonlite
     - r-tibble
     - r-xml2
+
   run:
     - r-base
     - r-wikidatar
@@ -54,4 +55,5 @@ about:
 
 extra:
   recipe-maintainers:
+    - dpryan79
     - ocefpaf

@@ -1,19 +1,21 @@
-{% set version = '0.2.0' %}
+{% set version = '0.3.0' %}
+{% set posix = 'm2-' if win else '' %}
+{% set native = 'm2w64-' if win else '' %}
 
 package:
   name: r-wikitaxa
-  version: {{ version }}
+  version: {{ version|replace("-", "_") }}
 
 source:
-  fn: wikitaxa_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/wikitaxa_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/wikitaxa/wikitaxa_{{ version }}.tar.gz
-  sha256: 944523717b2571af02a6bf15a58100dfb69530f702ab919f1c5fd3d263588c19
+    - {{ cran_mirror }}/src/contrib/wikitaxa_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/wikitaxa/wikitaxa_{{ version }}.tar.gz
+  sha256: 10dbabac6c56c1d0f33a66ff9b4f48b0bcb470711808a86863b48dc1140ec86c
 
 build:
+  merge_build_host: True  # [win]
+  number: 0
   noarch: generic
-  number: 1001
   script: R CMD INSTALL --build .
   rpaths:
     - lib/R/lib/
@@ -21,6 +23,8 @@ build:
 
 requirements:
   build:
+    - {{posix}}zip               # [win]
+  host:
     - r-base
     - r-wikidatar
     - r-crul >=0.3.4
@@ -29,7 +33,6 @@ requirements:
     - r-jsonlite
     - r-tibble
     - r-xml2
-
   run:
     - r-base
     - r-wikidatar
@@ -42,18 +45,46 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('wikitaxa')"  # [not win]
+    - $R -e "library('wikitaxa')"           # [not win]
     - "\"%R%\" -e \"library('wikitaxa')\""  # [win]
 
 about:
-  home: https://cran.r-project.org/package=wikitaxa
+  home: https://github.com/ropensci/wikitaxa
   license: MIT
   license_file: LICENSE
-  summary: 'Taxonomic information from Wikipedia, Wikicommons, Wikispecies, and
-    Wikidata. Functions included for getting taxonomic information from each of
+  summary: '''Taxonomic'' information from ''Wikipedia'', ''Wikicommons'', ''Wikispecies'', and
+    ''Wikidata''. Functions included for getting taxonomic information from each of
     the sources just listed, as well performing taxonomic search.'
+  license_family: MIT
 
 extra:
   recipe-maintainers:
-    - dpryan79
+    - conda-forge/r
     - ocefpaf
+
+# Package: wikitaxa
+# Title: Taxonomic Information from 'Wikipedia'
+# Description: 'Taxonomic' information from 'Wikipedia', 'Wikicommons', 'Wikispecies', and 'Wikidata'. Functions included for getting taxonomic information from each of the sources just listed, as well performing taxonomic search.
+# Version: 0.3.0
+# License: MIT + file LICENSE
+# URL: https://github.com/ropensci/wikitaxa
+# BugReports: https://github.com/ropensci/wikitaxa/issues
+# Authors@R: c( person("Scott", "Chamberlain", role = c("aut", "cre"), email = "myrmecocystus+r@gmail.com"), person("Ethan", "Welty", role = "aut") )
+# LazyLoad: yes
+# LazyData: yes
+# Encoding: UTF-8
+# Language: en-US
+# VignetteBuilder: knitr
+# Depends: R(>= 3.2.1)
+# Imports: WikidataR, data.table, curl, crul (>= 0.3.4), tibble, jsonlite, xml2
+# Suggests: roxygen2 (>= 6.1.0), testthat, knitr, rmarkdown, vcr
+# RoxygenNote: 6.1.0
+# X-schema.org-applicationCategory: Taxonomy
+# X-schema.org-keywords: taxonomy, species, API, web-services, Wikipedia, vernacular, Wikispecies, Wikicommons
+# X-schema.org-isPartOf: https://ropensci.org
+# NeedsCompilation: no
+# Packaged: 2018-10-19 21:00:31 UTC; sckott
+# Author: Scott Chamberlain [aut, cre], Ethan Welty [aut]
+# Maintainer: Scott Chamberlain <myrmecocystus+r@gmail.com>
+# Repository: CRAN
+# Date/Publication: 2018-10-19 21:30:03 UTC

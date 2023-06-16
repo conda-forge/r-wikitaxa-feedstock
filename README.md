@@ -1,11 +1,11 @@
-About r-wikitaxa
-================
+About r-wikitaxa-feedstock
+==========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-wikitaxa-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/ropensci/wikitaxa
 
 Package license: MIT
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-wikitaxa-feedstock/blob/main/LICENSE.txt)
 
 Summary: 'Taxonomic' information from 'Wikipedia', 'Wikicommons', 'Wikispecies', and 'Wikidata'. Functions included for getting taxonomic information from each of the sources just listed, as well performing taxonomic search.
 

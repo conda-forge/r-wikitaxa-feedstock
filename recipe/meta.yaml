@@ -1,6 +1,5 @@
 {% set version = "0.4.0" %}
 {% set posix = 'm2-' if win else '' %}
-{% set native = 'm2w64-' if win else '' %}
 
 package:
   name: r-wikitaxa
@@ -13,8 +12,7 @@ source:
   sha256: ba872853af59fdc8f1121d6e205f15e5bf4f2ec5ad68cd5755a423fa783bf7fc
 
 build:
-  merge_build_host: true  # [win]
-  number: 2
+  number: 3
   noarch: generic
   script: R CMD INSTALL --build .
   rpaths:
